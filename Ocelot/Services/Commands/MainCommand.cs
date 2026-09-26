@@ -1,5 +1,4 @@
 using System.Text;
-using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using Lumina.Extensions;
 using Ocelot.Extensions;
@@ -22,7 +21,7 @@ public class MainCommand : OcelotCommand, IMainCommand
 
     public MainCommand(
         ITranslator<MainCommand> translator,
-        IDalamudPluginInterface plugin,
+        OcelotPlugin plugin,
         IChatGui chat,
         IMainWindow window,
         IEnumerable<IMainCommandDelegate> delegates
@@ -30,7 +29,7 @@ public class MainCommand : OcelotCommand, IMainCommand
     {
         this.translator = translator;
 
-        var command = plugin.InternalName.ToKebabCase();
+        var command = plugin.CommandName.ToKebabCase();
         Command = command;
 
         this.chat = chat;

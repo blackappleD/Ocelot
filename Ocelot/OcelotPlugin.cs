@@ -17,6 +17,15 @@ public abstract class OcelotPlugin : IAsyncDalamudPlugin
 
     public abstract string Name { get; }
 
+    /// <summary>
+    ///     Root slash command (kebab-cased). Defaults to the Dalamud InternalName; override when a
+    ///     renamed build (e.g. a fork with a suffixed InternalName) should keep the original command.
+    /// </summary>
+    public virtual string CommandName
+    {
+        get => plugin.InternalName;
+    }
+
     protected OcelotPlugin(IDalamudPluginInterface plugin, IPluginLog logger)
     {
         this.plugin = plugin;
