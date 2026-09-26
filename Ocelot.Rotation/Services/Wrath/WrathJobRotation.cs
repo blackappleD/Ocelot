@@ -39,7 +39,9 @@ public sealed class WrathJobRotation(
             () =>
             {
                 WrathIPCWrapper.Init(pluginInterface, WrathIPCWrapper.ErrorType.All);
-                return WrathIPCWrapper.RegisterForLease(plugin.Name, plugin.Name);
+                // Wrath checks the first argument against loaded plugins (LeaseePluginDisabled),
+                // so it must be the real InternalName, not the display name.
+                return WrathIPCWrapper.RegisterForLease(pluginInterface.InternalName, plugin.Name);
             },
             LazyThreadSafetyMode.ExecutionAndPublication);
     }
