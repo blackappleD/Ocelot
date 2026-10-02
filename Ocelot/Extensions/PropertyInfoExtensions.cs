@@ -61,7 +61,6 @@ public static class PropertyInfoExtensions
         DrawWrappedTooltip(translator.T(tooltipKey));
     }
 
-    /// <summary>Hover help with word wrap — ImGui.SetTooltip is one long line and hard to read.</summary>
     public static void DrawWrappedTooltip(string text)
     {
         if (string.IsNullOrWhiteSpace(text))

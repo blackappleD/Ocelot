@@ -184,7 +184,6 @@ public class CommandManager : IOnStart, IDisposable
             }
             catch
             {
-                // ignored — Dalamud may already have torn handlers down
             }
         }
     }

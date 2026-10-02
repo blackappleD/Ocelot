@@ -28,7 +28,6 @@ public enum BossModPresetKind
     FullAr,
 }
 
-/// <summary>StayCloseToTarget / NormalMovement options applied to BOCCHI's BossMod presets.</summary>
 public readonly record struct BossModMovementSettings(
     string RangeOption,
     string ForbiddenZoneCushion,
@@ -50,14 +49,10 @@ public static class JobRotationBackendKeys
     public const string BossModReborn = "BossModReborn";
 }
 
-/// <param name="DisabledOccultOptions">
-///     Wrath phantom-job option names to leave off when the phantom job loadout is applied.
-/// </param>
 public readonly record struct JobRotationSessionOptions(
     bool ManualTargeting = true,
     IReadOnlyCollection<string>? DisabledOccultOptions = null);
 
-/// <param name="DisabledOccultOptions">See <see cref="JobRotationSessionOptions.DisabledOccultOptions"/>.</param>
 public readonly record struct CombatRotationRecipe(
     JobRotationBackendKind Job,
     CombatAiKind CombatAi,
@@ -70,7 +65,6 @@ public readonly record struct CombatRotationRecipe(
     public bool IsActive => Job != JobRotationBackendKind.None || CombatAi != CombatAiKind.None;
 }
 
-/// <summary>BossMod preset display names. Created if missing, then left in the user's preset list.</summary>
 public sealed class CombatAiPresetNaming
 {
     public string FateMiscAi { get; init; } = "BOCCHI AI FATE";

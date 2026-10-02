@@ -14,11 +14,6 @@ public static class ChainExWait
         return chain.Then(new WaitStep(time, name ?? $"Wait {time}"));
     }
 
-    public static IChain WaitSeconds(this IChain chain, double seconds, string? name = null)
-    {
-        return chain.Then(new WaitStep(TimeSpan.FromSeconds(seconds), name ?? $"Wait {seconds:0.###}s"));
-    }
-
     public static IChain WaitUntil(this IChain chain, DateTimeOffset when, string? name = null)
     {
         var now = DateTimeOffset.UtcNow;

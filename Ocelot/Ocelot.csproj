@@ -3,7 +3,7 @@
         <PackageId>FFXIVOcelot</PackageId>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="ECommons" Version="3.2.1.20" />
+        <PackageReference Include="ECommons" Version="3.2.1.21" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.7" />
     </ItemGroup>
 </Project>

@@ -4,10 +4,6 @@ namespace Ocelot.Rotation.Services.RotationSolverReborn;
 
 public sealed class RsrJobRotation(IRotationSolverRebornIpc ipc) : IJobRotationBackend
 {
-    /// <summary>
-    ///     Failed IPC retries only. Must not re-send Henched every tick after it lands —
-    ///     that was the 4.1.0.1 “Henched - No Casting” chat spam (#190).
-    /// </summary>
     private static readonly TimeSpan FailedRetryInterval = TimeSpan.FromSeconds(1);
 
     public JobRotationBackendKind Kind => JobRotationBackendKind.RotationSolverReborn;

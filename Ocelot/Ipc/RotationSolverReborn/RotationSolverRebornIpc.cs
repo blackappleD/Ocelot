@@ -40,7 +40,6 @@ public class RotationSolverRebornIpc(IDalamudPluginInterface plugin) : IRotation
                 }
                 catch
                 {
-                    // Off already landed; Wrath's LeaseCancelled callback can still throw.
                     return command == RSRStateCommandType.Off;
                 }
             }

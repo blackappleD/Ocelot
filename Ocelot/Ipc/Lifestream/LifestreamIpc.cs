@@ -73,7 +73,6 @@ public class LifestreamIpc(IDalamudPluginInterface plugin) : ILifestreamIpc
         }
         catch
         {
-            // optional
         }
     }
 }

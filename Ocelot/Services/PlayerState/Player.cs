@@ -43,7 +43,6 @@ public class Player(
 
     public int GetLevel() => PlayerCharacter?.Level ?? 0;
 
-    /// <summary>Base combat ClassJob (not Occult Crescent phantom job).</summary>
     public ClassJob? GetClassJob()
     {
         // Dalamud PlayerState tracks the real ClassJob; LocalPlayer can show phantom jobs in OC.
@@ -66,7 +65,6 @@ public class Player(
             }
         }
 
-        // Last resort: LocalPlayer only if it looks like a real combat job (not phantom).
         if (PlayerCharacter?.ClassJob is { RowId: not 0 } local
             && local.Value.Role is >= 1 and <= 5)
         {
@@ -111,7 +109,6 @@ public class Player(
             return false;
         }
 
-        // Role: 1 = tank, 2 = melee DPS
         return job.Value.Role is 1 or 2 || MeleeJobIds.Contains(job.Value.RowId);
     }
 

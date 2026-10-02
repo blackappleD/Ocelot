@@ -6,7 +6,6 @@ namespace Ocelot.Services.UI;
 
 public interface IBrandingService
 {
-    // Vars
     Vector2 WindowPadding { get; }
 
     Vector2 FramePadding { get; }
@@ -55,7 +54,6 @@ public interface IBrandingService
 
     Vector2 DisplaySafeAreaPadding { get; }
 
-    // ImGui Colors
     Color this[ImGuiCol col] { get; }
 
     Color Text { get; }
@@ -158,7 +156,6 @@ public interface IBrandingService
 
     Color ModalWindowDimBg { get; }
 
-    // Dalamud colors
     Color DalamudRed { get; }
 
     Color DalamudGrey { get; }

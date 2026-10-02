@@ -63,12 +63,10 @@ public class ExcelOrderedMultiSelectRenderer<TRow, TDisplay, TFilter>(IDataRepos
         }
         else if (propType == typeof(HashSet<uint>))
         {
-            // Convert existing HashSet to List for ordering
             var set = (HashSet<uint>?)prop.GetValue(target) ?? [];
             workingList = set.ToList();
             if (prop.GetValue(target) == null)
             {
-                // Replace with list to support ordering
                 prop.SetValue(target, workingList);
                 created = true;
             }
@@ -167,7 +165,6 @@ public class ExcelOrderedMultiSelectRenderer<TRow, TDisplay, TFilter>(IDataRepos
                         ImGui.SameLine();
                     }
 
-
                     var l = display.Display(data.Get(key));
                     if (ImGui.Selectable(l, true, ImGuiSelectableFlags.DontClosePopups))
                     {
@@ -177,7 +174,6 @@ public class ExcelOrderedMultiSelectRenderer<TRow, TDisplay, TFilter>(IDataRepos
 
                     ImGui.PopID();
                 }
-
 
                 for (var i = 0; i < cache!.Labels.Length; i++)
                 {

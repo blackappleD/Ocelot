@@ -9,3 +9,6 @@ public sealed class ConfigGroupAttribute(string key) : Attribute
 
     public int Order { get; init; } = 0;
 }
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Class, Inherited = true)]
+public sealed class ConfigHiddenAttribute : Attribute;

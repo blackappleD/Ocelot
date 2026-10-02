@@ -16,13 +16,10 @@ public interface IBossModIpc
 
     string? GetActive();
 
-    /// <summary>VBM Activate, or SetActive on BMR.</summary>
     bool Activate(string name);
 
-    /// <summary>VBM Deactivate, or ClearActive on BMR only when <paramref name="name"/> is active.</summary>
     bool Deactivate(string name);
 
-    /// <summary>Overlay a track on an existing preset without rewriting it. No-op if the IPC is missing.</summary>
     bool AddTransientStrategy(string presetName, string moduleTypeName, string trackName, string value);
 
     bool ClearTransientPresetStrategies(string presetName);

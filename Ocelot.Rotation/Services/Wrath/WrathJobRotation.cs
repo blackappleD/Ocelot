@@ -8,7 +8,6 @@ public sealed class WrathJobRotation(
     IDalamudPluginInterface pluginInterface,
     OcelotPlugin plugin) : IJobRotationBackend, IDisposable
 {
-    /// <summary>Phantom-job options BOCCHI always leaves off, whatever the user's blacklist says.</summary>
     public static readonly IReadOnlySet<string> BuiltInOccultOptionsLeftOff = new HashSet<string>(StringComparer.Ordinal)
     {
         "Phantom_Chemist_OccultElixir",
@@ -22,7 +21,6 @@ public sealed class WrathJobRotation(
 
     private bool farmingDefaultsApplied;
 
-    // Built-in left-off set plus the user's blacklist from the session options.
     private HashSet<string> occultOptionsLeftOff = new(BuiltInOccultOptionsLeftOff, StringComparer.Ordinal);
 
     private bool manualTargeting = true;
@@ -110,7 +108,6 @@ public sealed class WrathJobRotation(
             return;
         }
 
-        // Always clear local intent. Lease may already be dead (JobChanged); still try IPC.
         _ = SetAutoRotationState(false);
         rotationOn = false;
     }
@@ -165,10 +162,6 @@ public sealed class WrathJobRotation(
 
     public void Dispose() => Teardown();
 
-    /// <summary>
-    ///     Set Auto-Rotation on/off. Recreates the lease once on InvalidLease (job change, etc.).
-    ///     Does not change <see cref="rotationOn"/> — callers own that.
-    /// </summary>
     private bool SetAutoRotationState(bool on)
     {
         return InvokeWithLeaseRecovery(id => WrathIPCWrapper.SetAutoRotationState(id, on));
@@ -192,10 +185,6 @@ public sealed class WrathJobRotation(
         }
     }
 
-    /// <summary>
-    ///     Drop a Guid Wrath already cancelled. Keep <see cref="rotationOn"/> so Enable/Disable can
-    ///     re-apply intent on the new registration. Do not ReleaseControl (LeaseeReleased noise).
-    /// </summary>
     private void DropDeadLease()
     {
         lock (gate)
@@ -208,7 +197,6 @@ public sealed class WrathJobRotation(
 
     private void EnsureCurrentJobReady()
     {
-        // Best-effort: Auto-Rotation can be locked on even if job-ready fails briefly.
         _ = InvokeWithLeaseRecovery(WrathIPCWrapper.SetCurrentJobAutoRotationReady);
     }
 
@@ -232,8 +220,6 @@ public sealed class WrathJobRotation(
 
     private SetResult ApplyFarmingDefaultsTo(Guid id)
     {
-        // Only force what Bocchi needs + a few safe combat defaults. Everything else
-        // (rez policy, healer targeting, AoE count, etc.) stays the user's Wrath settings.
         WrathIPCWrapper.SetAutoRotationConfigState(id, AutoRotationConfigOption.BypassFATE, true);
         WrathIPCWrapper.SetAutoRotationConfigState(
             id,
@@ -246,9 +232,6 @@ public sealed class WrathJobRotation(
         return WrathIPCWrapper.SetAutoRotationConfigState(id, AutoRotationConfigOption.AutoCleanse, true);
     }
 
-    /// <summary>
-    ///     Run an IPC call; on InvalidLease drop the Guid and retry once with a fresh registration.
-    /// </summary>
     private bool InvokeWithLeaseRecovery(
         Func<Guid, SetResult> action,
         bool rearmAutoRotationAfterDrop = false)
@@ -263,7 +246,6 @@ public sealed class WrathJobRotation(
             SetResult result = action(Lease.Value);
             if (result != SetResult.InvalidLease)
             {
-                // IGNORED = wrapper swallowed an exception; keep the lease.
                 return IsAcceptable(result) || result == SetResult.IGNORED;
             }
 
@@ -300,9 +282,6 @@ public sealed class WrathJobRotation(
     private static bool IsAcceptable(SetResult result) =>
         result is SetResult.Okay or SetResult.OkayWorking or SetResult.Duplicate;
 
-    /// <summary>
-    ///     Turn a phantom job's pack off again. Best effort if Wrath is older than this IPC.
-    /// </summary>
     private static void TryReleaseOccult(Guid leaseId, uint phantomJobId)
     {
         try
@@ -326,8 +305,6 @@ public sealed class WrathJobRotation(
 
             List<string>? options = WrathIPCWrapper.GetOccultOptionNames(phantomJobId);
 
-            // One call turns the parent and every option on. Older Wrath without the gate
-            // reports a failure; fall back to setting each option individually below.
             bool bulk = IsOk(WrathIPCWrapper.SetOccultReadyForPhantomJob(leaseId, phantomJobId, enabled: true));
 
             WrathIPCWrapper.SetComboState(leaseId, parent, comboState: true, autoState: true);

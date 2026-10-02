@@ -2,10 +2,6 @@ using System.Threading;
 
 namespace Ocelot.Actions;
 
-/// <summary>
-///     While entered, combat-action pathfind cancel ignores UseAction calls from BOCCHI itself
-///     (mount, sprint, revive, buffs, etc.).
-/// </summary>
 public static class ActionCastScope
 {
     private static readonly AsyncLocal<int> Depth = new();

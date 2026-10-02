@@ -23,18 +23,6 @@ public static class ChainExIfThen
         return chain.Then(new ConditionalActionStep(condition, thenAction, elseAction, name));
     }
 
-    public static IChain Unless(
-        this IChain chain,
-        Func<IChainContext, ValueTask<bool>> condition,
-        Func<IChainContext, ValueTask<StepResult>> thenAction,
-        string? name = null)
-    {
-        return chain.Then(new ConditionalActionStep(
-            async ctx => !await condition(ctx),
-            thenAction,
-            name: name));
-    }
-
     public static IChain IfThen(
         this IChain chain,
         Func<IChainContext, CancellationToken, ValueTask<bool>> condition,

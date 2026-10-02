@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.Pictomancy", "Ocelot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.Rotation", "Ocelot.Rotation\Ocelot.Rotation.csproj", "{A2832FD4-09D6-4337-9A4F-D1BAB57C12CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.Mechanic", "Ocelot.Mechanic\Ocelot.Mechanic.csproj", "{481AEC74-6505-4E4C-97D9-A581B67B6683}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.Pathfinding", "Ocelot.Pathfinding\Ocelot.Pathfinding.csproj", "{8D2ECC47-FD3E-4B31-9E0B-E04F010EC728}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot.UI", "Ocelot.UI\Ocelot.UI.csproj", "{98940C7C-7BE8-4A30-B9E0-BF218AAAF8EE}"
@@ -77,18 +75,6 @@ Global
 		{A2832FD4-09D6-4337-9A4F-D1BAB57C12CC}.Release|x64.Build.0 = Release|Any CPU
 		{A2832FD4-09D6-4337-9A4F-D1BAB57C12CC}.Release|x86.ActiveCfg = Release|Any CPU
 		{A2832FD4-09D6-4337-9A4F-D1BAB57C12CC}.Release|x86.Build.0 = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|x64.Build.0 = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Debug|x86.Build.0 = Debug|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|Any CPU.Build.0 = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|x64.ActiveCfg = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|x64.Build.0 = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|x86.ActiveCfg = Release|Any CPU
-		{481AEC74-6505-4E4C-97D9-A581B67B6683}.Release|x86.Build.0 = Release|Any CPU
 		{8D2ECC47-FD3E-4B31-9E0B-E04F010EC728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D2ECC47-FD3E-4B31-9E0B-E04F010EC728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D2ECC47-FD3E-4B31-9E0B-E04F010EC728}.Debug|x64.ActiveCfg = Debug|Any CPU

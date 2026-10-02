@@ -1,6 +1,13 @@
-using Dalamud.Plugin;
+﻿using Dalamud.Plugin;
 
 namespace Ocelot.Services.PluginStatus;
+
+public interface IPluginStatus
+{
+    bool IsLoaded(string internalName);
+
+    bool IsInstalled(string internalName);
+}
 
 public class PluginStatus(IDalamudPluginInterface plugin) : IPluginStatus
 {

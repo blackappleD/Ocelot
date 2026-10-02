@@ -30,7 +30,6 @@ public static class Registry
                 }
                 catch
                 {
-                    // ignored
                 }
             }
         }

@@ -41,9 +41,6 @@ public class VNavmeshIpc(IDalamudPluginInterface plugin) : IVNavmeshIpc
     private readonly ICallGateSubscriber<List<Vector3>, bool, object> followPath =
         plugin.GetIpcSubscriber<List<Vector3>, bool, object>("vnavmesh.Path.MoveTo");
 
-    /// <summary>
-    ///     IPC-based detection (not InstalledPlugins) so Dev Mode / sideloaded vnavmesh still works.
-    /// </summary>
     public bool IsAvailable()
     {
         try
@@ -161,7 +158,6 @@ public class VNavmeshIpc(IDalamudPluginInterface plugin) : IVNavmeshIpc
         }
         catch
         {
-            // ignored
         }
     }
 
@@ -185,7 +181,6 @@ public class VNavmeshIpc(IDalamudPluginInterface plugin) : IVNavmeshIpc
         }
         catch
         {
-            // ignored
         }
     }
 
@@ -207,7 +202,6 @@ public class VNavmeshIpc(IDalamudPluginInterface plugin) : IVNavmeshIpc
         }
         catch
         {
-            // ignored
         }
     }
 
@@ -278,7 +272,6 @@ public class VNavmeshIpc(IDalamudPluginInterface plugin) : IVNavmeshIpc
         }
         catch
         {
-            // ignored
         }
     }
 }

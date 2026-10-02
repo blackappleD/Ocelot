@@ -20,7 +20,6 @@ public interface IPlayer
 
     int GetLevel();
 
-    /// <summary>Base combat ClassJob — not Occult Crescent phantom job.</summary>
     ClassJob? GetClassJob();
 
     int GetLevel(ClassJob job);

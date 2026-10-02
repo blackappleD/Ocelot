@@ -20,7 +20,6 @@ public class EnumSelectRenderer<TEnum, TDisplay, TFilter>(TDisplay display, TFil
 
     public bool Render(object target, PropertyInfo prop, EnumSelectAttribute<TEnum, TDisplay, TFilter> attr, Type owner, ITranslator translator)
     {
-        // Rebuild when the filter set changes (e.g. combat plugins installed/uninstalled mid-session).
         var labels = new List<string>();
         var values = new List<TEnum>();
 
@@ -41,7 +40,6 @@ public class EnumSelectRenderer<TEnum, TDisplay, TFilter>(TDisplay display, TFil
         {
             cache = new CachedList(labels.ToArray(), values.ToArray());
         }
-
 
         if (prop.PropertyType != typeof(TEnum))
         {

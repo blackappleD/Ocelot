@@ -5,7 +5,6 @@ namespace Ocelot.Lifecycle.Hosts;
 
 public class StopHost(IServiceProvider services, ILogger<StopHost> logger) : BaseEventHost(logger), IOrderedHook
 {
-    // This is in opposite order, so teardown happens in reverse when compared to start up
     private readonly Lazy<IOnStop[]> stopHooks = new(() =>
         services.GetServices<IOnStop>().OrderBy(h => h.Order).ToArray());
 

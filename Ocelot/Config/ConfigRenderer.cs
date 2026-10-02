@@ -118,7 +118,6 @@ public class ConfigRenderer : IConfigRenderer
                              .Min())
                      .ThenBy(kvp => kvp.Key))
             {
-                // Single-page groups: show one top-level entry (avoid "Mob Farmer → Mob Farmer").
                 if (gConfigs.Count == 1)
                 {
                     var only = gConfigs[0];
@@ -131,7 +130,6 @@ public class ConfigRenderer : IConfigRenderer
                     continue;
                 }
 
-                // Gold category header (RelicTracker-style), not another selectable row.
                 ImGui.Spacing();
                 ImGui.TextColored(OcelotUi.Header, translator.T($"config_group.{key}.label"));
 
@@ -162,7 +160,6 @@ public class ConfigRenderer : IConfigRenderer
         {
             var type = current.GetType();
 
-            // Page blurb when present (muted intro + separator, RelicTracker Settings recipe).
             var descKey = current.GetTooltipKey();
             if (translator.Has(descKey))
             {
@@ -191,7 +188,6 @@ public class ConfigRenderer : IConfigRenderer
                 var fieldAttr = attr!;
                 if (!string.IsNullOrEmpty(fieldAttr.Section) && fieldAttr.Section != lastSection)
                 {
-                    // Space every section, including the first after the page blurb.
                     ImGui.Spacing();
                     if (lastSection != null)
                     {

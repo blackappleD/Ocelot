@@ -46,7 +46,6 @@ public sealed class PandorasBoxIpc(IDalamudPluginInterface plugin) : IPandorasBo
         }
         catch
         {
-            // Pandora missing / IPC broken — ignore.
         }
     }
 }

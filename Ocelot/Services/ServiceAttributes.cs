@@ -9,3 +9,6 @@ public sealed class OcelotServiceAttribute : Attribute
 
     public ServiceLifetime Lifetime { get; init; } = ServiceLifetime.Singleton;
 }
+
+[AttributeUsage(AttributeTargets.Interface)]
+public class OcelotAutoWireAttribute : Attribute;

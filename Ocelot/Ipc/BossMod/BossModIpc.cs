@@ -3,7 +3,6 @@ using Dalamud.Plugin.Ipc;
 
 namespace Ocelot.Ipc.BossMod;
 
-/// <summary>BossMod / BossMod Reborn shared <c>BossMod.Presets.*</c> IPC.</summary>
 public class BossModIpc(IDalamudPluginInterface plugin) : IBossModIpc
 {
     private readonly ICallGateSubscriber<string, bool, bool> create =
@@ -135,7 +134,6 @@ public class BossModIpc(IDalamudPluginInterface plugin) : IBossModIpc
         }
         catch
         {
-            // BMR has no Activate.
         }
 
         return SetActive(name);
@@ -152,7 +150,6 @@ public class BossModIpc(IDalamudPluginInterface plugin) : IBossModIpc
         }
         catch
         {
-            // BMR has no Deactivate.
         }
 
         string? active = GetActive();

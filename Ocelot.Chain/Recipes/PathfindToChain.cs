@@ -61,7 +61,6 @@ public class
             .Then(new WaitUntilStep(
                 _ =>
                 {
-                    // A completing pending task may refill waypoints — keep clearing until the slot frees.
                     if (vnav.IsPathfinding())
                     {
                         pathfinder.Stop();
@@ -93,8 +92,6 @@ public class
                         return new ValueTask<bool>(true);
                     }
 
-                    // Pathfinder/vnav finished without arriving — leave the wait so Destination Check fails
-                    // instead of sitting on the full 5 minute timeout.
                     if (HasStoppedMoving())
                     {
                         return new ValueTask<bool>(true);
@@ -163,9 +160,6 @@ public class
         return config.DistanceThreshold > 0f ? config.DistanceThreshold : 2f;
     }
 
-    /// <summary>
-    ///     Match the point PathfindAndMoveTo actually moves toward (including floor snap).
-    /// </summary>
     private Vector3 ResolvedDestination(PathfinderConfig config)
     {
         Vector3 destination = config.To();
@@ -186,7 +180,6 @@ public class
             return float.MaxValue;
         }
 
-        // Ground movement: ignore bad destination Y (authored points are often slightly underground).
         if (!config.AllowFlying)
         {
             return player.Distance2D(destination);

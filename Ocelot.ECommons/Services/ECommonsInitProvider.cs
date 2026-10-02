@@ -1,6 +1,11 @@
-using ECommons;
+﻿using ECommons;
 
 namespace Ocelot.ECommons.Services;
+
+public interface IECommonsInitProvider
+{
+    Module[] GetModules();
+}
 
 public class ECommonsInitProvider : IECommonsInitProvider
 {

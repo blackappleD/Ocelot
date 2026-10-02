@@ -81,7 +81,6 @@ public static class IServiceCollectionExtensions
 
         services.AddSingleton<CommandManager>();
 
-        // Subcommands of /bocchi (or plugin InternalName) — not registered as their own slash commands.
         services.AddSingleton<ReloadTranslationsCommand>();
 
         services.AddSingleton<IConfigCommand, ConfigCommand>();

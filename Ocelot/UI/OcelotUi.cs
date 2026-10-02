@@ -3,10 +3,6 @@ using Dalamud.Bindings.ImGui;
 
 namespace Ocelot.UI;
 
-/// <summary>
-/// Shared chrome for Config field widgets (Ocelot cannot reference BOCCHI.Common).
-/// Keep colors and padding aligned with BocchiUi.
-/// </summary>
 public static class OcelotUi
 {
     public static readonly Vector4 Header = new(0.85f, 0.72f, 0.35f, 1f);

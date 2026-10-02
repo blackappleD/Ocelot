@@ -16,3 +16,12 @@ public interface IPathfinder
 
     void Stop();
 }
+
+public enum PathfindingState
+{
+    Idle,
+
+    Pathfinding,
+
+    Moving,
+}

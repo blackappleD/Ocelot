@@ -28,7 +28,6 @@ public class LoadHost(IServiceProvider services, ILogger<LoadHost> logger) : Bas
             }
             catch (Exception)
             {
-                // Logger not initialized on load
             }
         }
     }

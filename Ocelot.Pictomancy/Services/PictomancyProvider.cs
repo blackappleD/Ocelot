@@ -19,14 +19,11 @@ public class PictomancyProvider : IPictomancyProvider, IOnPreRender, IOnPostRend
             throw new InvalidOperationException("Pictomancy draw list not available. It is only available during the render lifecycle hook.");
         }
 
-
         return current;
     }
 
-
     public void PreRender()
     {
-        // Dispose any instance that managed to somehow escape the PostRender
         if (current is not null)
         {
             try
@@ -57,7 +54,6 @@ public class PictomancyProvider : IPictomancyProvider, IOnPreRender, IOnPostRend
         }
         catch (InvalidOperationException)
         {
-            // Already disposed, we don't care
         }
         finally
         {

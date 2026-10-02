@@ -16,7 +16,7 @@ public sealed class GateService(IFramework framework) : IGateService
     {
         if (interval <= 0)
         {
-            return true; // degenerate = always run
+            return true;
         }
 
         var bucket = buckets.GetOrCreateValue(owner);

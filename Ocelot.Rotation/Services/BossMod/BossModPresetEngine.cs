@@ -53,9 +53,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
 
     private CombatActivity activeActivity = CombatActivity.Fate;
 
-    /// <summary>
-    ///     Activity already armed. Re-Activate every tick restarts the preset and breaks dodges.
-    /// </summary>
     private CombatActivity? armedActivity;
 
     private BossModPresetKind presetKind = BossModPresetKind.MiscAi;
@@ -66,9 +63,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
 
     private BossModMovementSettings? bakedMovement;
 
-    /// <summary>
-    ///     Rebuild owned presets from stock JSON when true; otherwise create only if missing.
-    /// </summary>
     public bool OverwriteExisting { get; set; }
 
     public BossModMovementSettings Movement { get; set; } = BossModMovementSettings.Default;
@@ -92,7 +86,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
     {
         wantOwned = true;
 
-        // Confirm BossMod still has the preset active (user / reload can clear it).
         bool alreadyArmed = wantActive
                             && armedActivity == activity
                             && presetsReady
@@ -151,7 +144,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
         bool missing = ipc.Get(fate) == null || ipc.Get(ce) == null || ipc.Get(mob) == null;
         bool jobChanged = OverwriteExisting && bakedJobId is not null && bakedJobId.Value != jobId;
         bool roleChanged = OverwriteExisting && bakedAsMelee is not null && bakedAsMelee.Value != isMelee;
-        // Any Combat movement slider must remake when auto-update is on.
         bool movementChanged = OverwriteExisting
                                && bakedMovement is not null
                                && bakedMovement != Movement;
@@ -171,7 +163,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
             }
         }
 
-        // Push BOCCHI movement onto the live preset even when auto-update is off (transients).
         if (wantActive && presetsReady)
         {
             ApplyMovement(naming.PresetNameFor(activeActivity, presetKind));
@@ -287,7 +278,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
                || string.Equals(active, LegacyAiPresetName, StringComparison.Ordinal);
     }
 
-    /// <summary>True when BossMod currently has the preset for this activity active.</summary>
     private bool IsPresetActiveFor(CombatActivity activity)
     {
         if (!ipc.IsAvailable)
@@ -429,7 +419,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
         string delay = Movement.DelayMovement;
         string separateDodge = Movement.SeparateDodgeDelay;
         string dodgeDelay = Movement.DodgeDelayMovement;
-        // FATE AutoTarget = FATE only; CE / Mob Farm = Everything.
         bool fateOnlyTargets = activity == CombatActivity.Fate;
         return presetKind == BossModPresetKind.FullAr
             ? BuildFullArPresetJson(name, fateOnlyTargets, rangeOption, cushion, delay, separateDodge, dodgeDelay)
@@ -484,7 +473,6 @@ public sealed class BossModPresetEngine(IBossModIpc ipc, IPlayer player, CombatA
             sb.AppendLine(",");
         }
 
-        // Empty xan modules default to ST; set AOE like VBM Default. VeynWAR uses ForceAOE + farm tracks.
         static string JobStrategies(string module) =>
             module.EndsWith("VeynWAR", StringComparison.Ordinal)
                 ? """

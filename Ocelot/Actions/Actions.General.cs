@@ -88,7 +88,6 @@ public class Actions
 
     public readonly static Action TriangleTarget = new(ActionType.GeneralAction, 42);
 
-    /// <param name="id">Mount sheet row ID; 0 = Mount Roulette.</param>
     public static Action Mount(uint id)
     {
         return id == 0 ? MountRoulette : new Action(ActionType.Mount, id);
