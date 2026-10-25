@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.Chain.Steps;
+using Ocelot.Chain.Thread;
 
 namespace Ocelot.Chain;
 
@@ -114,6 +115,8 @@ public class Chain(string name, IServiceProvider services) : IChain
 
     private async Task<ChainResult> ExecuteStepsAsync(IChainContext context)
     {
+        context.RecordStartThread();
+
         foreach (var step in steps)
         {
             try
@@ -137,7 +140,7 @@ public class Chain(string name, IServiceProvider services) : IChain
                     pipeline = () => mw.InvokeAsync(context, step, next);
                 }
 
-                var result = await pipeline();
+                var result = await context.RunOnStartThread(() => pipeline());
 
                 if (result.IsCanceled || context.CancellationToken.IsCancellationRequested)
                 {

@@ -1,4 +1,6 @@
-﻿namespace Ocelot.Chain.Middleware.Step;
+﻿using Ocelot.Chain.Thread;
+
+namespace Ocelot.Chain.Middleware.Step;
 
 public class RetryStepMiddleware : IStepMiddleware
 {
@@ -21,7 +23,7 @@ public class RetryStepMiddleware : IStepMiddleware
 
             try
             {
-                var lastResult = await next();
+                var lastResult = await context.RunOnStartThread(() => next());
 
                 if (lastResult.IsSuccess)
                 {
